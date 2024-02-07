@@ -10,7 +10,12 @@ make sure the following APIs are enabled:
 - Identity and Access Management (IAM) API
 - Kubernetes Engine API
 
-## Kepler
+## Manifests
+
+Services for the cluster have been installed with manifests based on the instruction guides for
+each service. Some of the manifest structures utilize kustomize when appropriate
+
+### Kepler
 
 Installed Kepler the GKE cluster using manifests: https://sustainable-computing.io/installation/kepler/
 
@@ -31,3 +36,12 @@ Note: We have put our generated manifest files for the kepler deployment in the 
   Check the state is `up` for the `kepler-exporter`
 
 5. Create Grafana dashboards based on collected data
+
+### Microservice-demo
+
+The [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) from GCP is a simple microservice
+boutique webshop.
+
+The README.md in manifests/microservice-demo/ explains how to run it yourself
+Additionally, we added a kustomize overlay to specify a specific GKE nodepool
+to run the microservice on. More information on that can be found at manifests/microservice-demo/components/node-selector
