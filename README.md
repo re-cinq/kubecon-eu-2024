@@ -15,11 +15,13 @@ make sure the following APIs are enabled:
 Installed Kepler the GKE cluster using manifests: https://sustainable-computing.io/installation/kepler/
 
 1. Install monitoring stack
-   - Prometheus with operator: https://sustainable-computing.io/installation/kepler/#deploy-the-prometheus-operator
+   - [Prometheus with operator](https://sustainable-computing.io/installation/kepler/#deploy-the-prometheus-operator)
    - kepler-exporter for grafana (requires `yq`)
 
-2. Clone the kepler repo to build manifests with the prometheus deployment from step 1
+2. Clone the kepler repo and run script to build manifests with the prometheus deployment from step 1:
  `make build-manifest OPTS=PROMETHEUS_DEPLOY`
+
+Note: We have put our generated manifest files for the kepler deployment in the `manifests/` dir
 
 3. Make sure all of the kepler services deployed without issue to the kepler ns:
  `kubectl get all -n kepler`
