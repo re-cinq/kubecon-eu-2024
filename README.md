@@ -45,3 +45,17 @@ boutique webshop.
 The README.md in manifests/microservice-demo/ explains how to run it yourself
 Additionally, we added a kustomize overlay to specify a specific GKE nodepool
 to run the microservice on. More information on that can be found at manifests/microservice-demo/components/node-selector
+
+### Monolith Demo
+
+We where not able to find a good example of a monolithic demo. Therefore as
+this is not a comparison between monoliths and microservices, but rather trying
+to understand how a single deployable large system contributes to emissions and
+where it performs better, we decided to take the previously described
+microservice demo and create a single pod with all the components in one. We
+understand that this is by no means an "optimized" setup, but it will be able
+to give us the data that we need. 
+
+The [README](manifests/monolith-demo/README.md) for the Monlith Demo explains how to run it yourself
+Additionally, we added a kustomize overlay to specify a specific GKE nodepool
+to run the monolith on. More information on that can be found in the components [README](manifests/monolith-demo/components/node-selector/README.md)
