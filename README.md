@@ -26,16 +26,25 @@ Installed Kepler the GKE cluster using manifests: https://sustainable-computing.
 2. Clone the kepler repo and run script to build manifests with the prometheus deployment from step 1:
  `make build-manifest OPTS=PROMETHEUS_DEPLOY`
 
-Note: We have put our generated manifest files for the kepler deployment in the `manifests/` dir
+Note: We have put our generated manifest files for the kepler deployment in the `manifests/kepler` dir
 
-3. Make sure all of the kepler services deployed without issue to the kepler ns:
+3. By default kepler uses eBPF to access power consumption values, but since we are running in GKE and the kernel is
+   inaccessible, we need to enable the machine learning [regression model](https://sustainable-computing.io/kepler_model_server/get_started/#step-2-learn-how-to-obtain-power-model).
+   To do this edit the ConfigMap `kepler-cfm` in `deployment.yaml` file and update the `MODEL_CONFIG` value with the line `MODEL_SERVER_ENABLE=true`, so it looks like:
+   ```
+     MODEL_CONFIG: |
+       CONTAINER_COMPONENTS_ESTIMATOR=false
+       MODEL_SERVER_ENABLE=true
+   ```
+
+4. Make sure all of the kepler services deployed without issue to the kepler ns:
  `kubectl get all -n kepler`
 
-4. Check the prometheus exporter is collecting metrics via kepler
+5. Check the prometheus exporter is collecting metrics via kepler
  `kubectl -n monitoring port-forward svc/prometheus-k8s 9090`
   Check the state is `up` for the `kepler-exporter`
 
-5. Create Grafana dashboards based on collected data
+6. Create Grafana dashboards based on collected data
 
 ### Microservice-demo
 
