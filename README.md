@@ -1,6 +1,21 @@
-# kubecon-eu-2024
+# KubeCon CloudNativeCon EU 2024 - Saving the Planet One Cluster at a Time
 
-## Terraform
+For our experiment we have setup four scenarios
+
+- Microservices using small nodes 
+- Microservices using big nodes
+- A Monolith using Small nodes
+- A monolith using big nodes 
+
+The idea behind this demonstartion is to show the affect of energy
+proportionality (i.e how utilized a node is) and the emissions that are
+generated from each scenario 
+
+This repository is for anyone that wants to replicate our demonstration
+
+## Repository Layout
+
+### Terraform
 
 make sure the following APIs are enabled:
 
@@ -10,12 +25,22 @@ make sure the following APIs are enabled:
 - Identity and Access Management (IAM) API
 - Kubernetes Engine API
 
-## Manifests
+### Manifests
 
 Services for the cluster have been installed with manifests based on the instruction guides for
-each service. Some of the manifest structures utilize kustomize when appropriate
+each service. We have tried to make the installation as simple as possible, so in order to deploy the stack, you can simply run:
 
-### Kepler
+```bash
+kubectl apply -k manifests
+```
+
+This should set up the experiment.
+
+**NOTE:** we ran this demonstration on GKE therefore the node selection setup
+is based on how the cluster is generated in the [terraform](./terraform)
+directory
+
+#### Kepler
 
 Installed Kepler the GKE cluster using manifests: https://sustainable-computing.io/installation/kepler/
 
@@ -37,7 +62,7 @@ Note: We have put our generated manifest files for the kepler deployment in the 
 
 5. Create Grafana dashboards based on collected data
 
-### Microservice-demo
+#### Microservice-demo
 
 The [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) from GCP is a simple microservice
 boutique webshop.
@@ -46,7 +71,7 @@ The README.md in manifests/microservice-demo/ explains how to run it yourself
 Additionally, we added a kustomize overlay to specify a specific GKE nodepool
 to run the microservice on. More information on that can be found at manifests/microservice-demo/components/node-selector
 
-### Monolith Demo
+#### Monolith Demo
 
 We where not able to find a good example of a monolithic demo. Therefore as
 this is not a comparison between monoliths and microservices, but rather trying
@@ -56,6 +81,6 @@ microservice demo and create a single pod with all the components in one. We
 understand that this is by no means an "optimized" setup, but it will be able
 to give us the data that we need. 
 
-The [README](manifests/monolith-demo/README.md) for the Monlith Demo explains how to run it yourself
+The [README](manifests/bases/monolith-demo/README.md) for the Monlith Demo explains how to run it yourself
 Additionally, we added a kustomize overlay to specify a specific GKE nodepool
-to run the monolith on. More information on that can be found in the components [README](manifests/monolith-demo/components/node-selector/README.md)
+to run the monolith on. More information on that can be found in the components [README](manifests/components/node-selector-big/README.md)

@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- big-nodes-microservices
+- big-nodes-monolith
+- small-nodes-microservices
+- small-nodes-monolith

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: something 
+spec:
+  template:
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: medium-nodes
