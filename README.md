@@ -47,6 +47,7 @@ Installed Kepler the GKE cluster using manifests: https://sustainable-computing.
 1. Install monitoring stack
    - [Prometheus with operator](https://sustainable-computing.io/installation/kepler/#deploy-the-prometheus-operator)
    - kepler-exporter for grafana (requires `yq`)
+   We have done this already for our installation, and running `kubectl apply -f monitoring/` should deploy the monitoring stack and kepler dashboards.
 
 2. Clone the kepler repo and run script to build manifests with the prometheus deployment from step 1:
  `make build-manifest OPTS=PROMETHEUS_DEPLOY`
